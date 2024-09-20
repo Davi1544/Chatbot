@@ -1,71 +1,50 @@
-# first steps
+import maritalk
+import telebot
+from dotenv import load_dotenv
 import os
 
-import maritalk
+import termo as termo
+import const as const
 
-from dotenv import load_dotenv
+if __name__ == "__main__":
+    # setup basico
+    load_dotenv()
+    CHAVE_MARITACA = os.getenv("CHAVE_MARITACA")
+    CHAVE_TELEGRAM = os.getenv("CHAVE_TELEGRAM")
+    model = maritalk.MariTalk(
+        key=CHAVE_MARITACA,
+        model="sabia-3"
+    )
+    bot = telebot.TeleBot(CHAVE_TELEGRAM)
 
-load_dotenv()
+    # criando objeto jogo
+    game = termo.Termo()
 
-chave = os.getenv("CHAVE")
+    # funções
+    def escreva(messageObj, mensagem):
+        bot.reply_to(messageObj, mensagem)
 
-model = maritalk.MariTalk(
-    key=chave,
-    model="sabia-3"  # No momento, suportamos os modelos sabia-3, sabia-2-medium e sabia-2-small
-)
+    def sorteiePalavraIA() -> str:
+        palavra = model.generate(
+            const.IA_MENSAGEM_PALAVRA_5,
+            chat_mode=False,
+            do_sample=False,
+            stopping_tokens=["\n"]
+        )["answer"]
 
+        print(palavra)
 
+        return palavra
 
-
-
-
-#pergunta do usuario
-user_question = input()
-
-question = model.generate(user_question, max_tokens=200)
-
-answer = question["answer"]
-
-print(f"Resposta: {answer}")
+    # telegram
+    @bot.message_handler(commands=["start"])
+    def start(message):
+        game = termo.Termo()
+        escreva(message, const.MENSAGEM_ENTRADA)
     
+    @bot.message_handler(commands=["smashai"])
+    def start(message):
+        palavra = sorteiePalavraIA()
+        escreva(message, palavra)
 
-while(True):
-    #pega o antigo contexto da conversa
-    user_question = input()
-
-    history = [
-        {"role": "user", "content": user_question},
-        {"role": "assistant", "content": "irei escrever uma palavra,que termina com a mesma vogal que a sua!"}  # Aqui você adiciona a resposta anterior do modelo
-        ]
-
-    question = model.generate(history, max_tokens=200)
-
-    answer = question["answer"]
-
-    print(f"Resposta: {answer}")
-    
-
-
-
-
-
-
-
-
-
-question = model.generate(history, max_tokens=200)
-
-answer = question["answer"]
-
-
-print(f"Resposta: {answer}")
-
-
-
-
-
-
-
-
-
-
+    bot.infinity_polling()
