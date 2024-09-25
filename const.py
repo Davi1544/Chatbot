@@ -11,3 +11,22 @@ Palavra: março
 Palavra: festa
 Palavra: \n
 """
+
+
+
+PROMPT_MARITACA = """Você é um Chatbot que joga termo, que é um jogo onde \
+    O jogador tem uma tentativa para adivinhar uma palavra de cinco letras  \
+    Escolha uma palavra para tentar advinhar a palavra sorteada com base na dica recebida.
+
+    Dica:  a palavra começa com a letra f
+    Resposta: fornalha
+
+    Dica:  a palavra possui a vogal u
+    Resposta: tatu
+
+
+    Dica:  não pussuo dicas
+    Resposta: céu
+
+
+    Dica: """
