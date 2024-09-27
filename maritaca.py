@@ -1,4 +1,3 @@
-
 import maritalk
 
 class Maritaca:
@@ -9,7 +8,8 @@ class Maritaca:
           '''
             key : Chave da api do bot;
             prompt: prompt few-shot maritaca;
-          '''
+            '''
+
           self.__key = key
           self.prompt  = prompt
     
@@ -22,8 +22,8 @@ class Maritaca:
             key=self.__key,
             model="sabia-3" 
         )
-
     
+
     def accumulatePrompt(self,tip):
         '''
         essa função faz o bot chutar uma palavra com base na dica passda , e retorna essa palavra;
