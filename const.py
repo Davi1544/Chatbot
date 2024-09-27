@@ -14,12 +14,42 @@ Palavra: \n
 
 
 
+
+
+
+
+#PROMPT FEW-SHOTS MARITACA
 PROMPT_MARITACA = """Você é um Chatbot que joga termo, que é um jogo onde \
     O jogador tem uma tentativa para adivinhar uma palavra de cinco letras  \
     Escolha uma palavra para tentar advinhar a palavra sorteada com base na dica recebida.
 
     Dica:  a palavra começa com a letra f
     Resposta: fornalha
+
+    Dica:  a palavra começa com a letra a
+    Resposta: abelha
+    
+    Dica:  a palavra começa com a letra b
+    Resposta: besouro
+
+    Dica:  a palavra termina com a letra o
+    Resposta: tesouro
+
+    Dica:  a palavra termina com a letra e
+    Resposta: peixe
+    
+    Dica:  a segunda letra da palvra é u
+    Resposta: luta
+
+    Dica:  a segunda letra da palvra é t
+    Resposta: estar
+
+
+    Dica:  a terceira letra da palvra é s
+    Resposta: cesta
+
+    Dica:  a terceira letra da palvra é m
+    Resposta: lamna
 
     Dica:  a palavra possui a vogal u
     Resposta: tatu
@@ -30,3 +60,5 @@ PROMPT_MARITACA = """Você é um Chatbot que joga termo, que é um jogo onde \
 
 
     Dica: """
+
+
