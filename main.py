@@ -5,8 +5,15 @@ import os
 
 import termo as termo
 import const as const
+import telegram as telegram
+import Randomword as random
+import Maritaca as maritaca
+
+# setup game
+game = termo.Termo()
 
 if __name__ == "__main__":
+    chave = "7561963619:AAG1SCZBU-rwRG55jk228p3QE6dzlQqzo9o"
     # setup basico
     load_dotenv()
     CHAVE_MARITACA = os.getenv("CHAVE_MARITACA")
@@ -17,34 +24,20 @@ if __name__ == "__main__":
     )
     bot = telebot.TeleBot(CHAVE_TELEGRAM)
 
-    # criando objeto jogo
-    game = termo.Termo()
-
-    # funções
-    def escreva(messageObj, mensagem):
-        bot.reply_to(messageObj, mensagem)
-
-    def sorteiePalavraIA() -> str:
-        palavra = model.generate(
-            const.IA_MENSAGEM_PALAVRA_5,
-            chat_mode=False,
-            do_sample=False,
-            stopping_tokens=["\n"]
-        )["answer"]
-
-        print(palavra)
-
-        return palavra
-
     # telegram
     @bot.message_handler(commands=["start"])
     def start(message):
+        global bot
+
         game = termo.Termo()
-        escreva(message, const.MENSAGEM_ENTRADA)
+        telegram.escreva(bot, message, const.MENSAGEM_ENTRADA)
     
     @bot.message_handler(commands=["smashai"])
     def start(message):
-        palavra = sorteiePalavraIA()
-        escreva(message, palavra)
+        global bot
+
+        palavra = random.getWord()
+        game.palavra = palavra
+        print(palavra)
 
     bot.infinity_polling()

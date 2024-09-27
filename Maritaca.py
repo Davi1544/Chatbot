@@ -2,6 +2,7 @@ import maritalk
 
 class Maritaca:
  
+    
     model = 0
     
     def __init__(self, key,prompt ):
