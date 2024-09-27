@@ -54,6 +54,21 @@ if __name__ == "__main__":
     def jogo(message):
         global bot
 
-        print(message.text)
+        if game.palavra == "":
+            telegram.escreva(bot, message, const.MENSAGEM_NO_GAME_WORD)
+            return
+        
+        # considerando que o jogo já foi iniciado
+        digitado = message.text
+
+        if(not game.trata_palavra(random, digitado)):
+            telegram.nao_conheco()
+
+        # considerando que a palavra é válida
+        game.julga_palavra(True, digitado)
+
+        print(game.palavra)
+        print(game.user["escolhidas"])
+        print(game.user["feedbacks"])
 
     bot.infinity_polling()

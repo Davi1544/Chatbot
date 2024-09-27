@@ -23,3 +23,17 @@ class Randomword:
         
         return word
 
+    def is_in(self, palavra):
+        """
+            Checa se uma palavra está no arquivo
+        """
+
+        arraywords = []
+        with open(self.file,'r') as file:
+            for line in file:
+                arraywords.append(line.strip())
+
+        if palavra in arraywords:
+            return True
+        else:
+            return False

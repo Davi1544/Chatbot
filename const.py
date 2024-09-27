@@ -1,6 +1,7 @@
 # TELEGRAM
 MENSAGEM_ENTRADA="Iniciando Jogo..."
-MENSAGEM_RESTART_ATTEMPT="Você está tentando reiniciar o jogo enquanto o último não foi terminado. Use \ restart para reiniciar o jogo."
+MENSAGEM_RESTART_ATTEMPT="Você está tentando reiniciar o jogo enquanto o último não foi terminado. Use /restart para reiniciar o jogo."
+MENSAGEM_NO_GAME_WORD="Use /start para iniciar o jogo"
 
 # MARITACA
 IA_MENSAGEM_PALAVRA_5="""

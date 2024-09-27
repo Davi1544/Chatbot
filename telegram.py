@@ -38,3 +38,9 @@ def mostra_jogo(bot, palavras_escolhidas, feedback):
 
         claro que as letras código virariam emojis, ent vc tem que descobrir como mandar emojis pelo python ={
     """
+
+def nao_conheco():
+    """
+        Se por quaisquer motivos, a palavra digitada pelo usuário não é reconhecida, então essa função será chamada.
+        Imprima algo nas linhas de: Não conheco essa palavra, ou ela não segue as regras do jogo =( 
+    """
