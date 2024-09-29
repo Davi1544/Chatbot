@@ -10,6 +10,7 @@ import const as const
 def escreva(bot, messageObj, mensagem):
     bot.reply_to(messageObj, mensagem)
 
+
 def pede_palavra_usuario(bot, message, palavras_escolhidas):
     """
     Pede uma palavra de 5 letras, cofere se tem 5 letras e pede até receber. A função tbm confere se a palavra já não foi escolhida
@@ -18,7 +19,11 @@ def pede_palavra_usuario(bot, message, palavras_escolhidas):
     try:
         command, word = message.text.split(maxsplit=1)
         word = word.upper()
+        palavras = open("files/words.txt", "r")
+        palavras = palavras.read().split()
         if len(word) != 5:
+            bot.reply_to(message, "Palavra de tamanho inválido, tente novamente")
+        elif word.lower() not in palavras:
             bot.reply_to(message, "Palavra inválida, tente novamente")
         elif word in palavras_escolhidas:
             bot.reply_to(message, "Palavra já escolhida, tente novamente")
@@ -26,8 +31,6 @@ def pede_palavra_usuario(bot, message, palavras_escolhidas):
             return word   
     except ValueError:
         bot.reply_to(message, "Escolha uma palavra e tente novamente")
-
-
 
 
 def mostra_jogo(bot, message, palavras_escolhidas, feedback):
