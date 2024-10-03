@@ -14,51 +14,46 @@ Palavra: \n
 
 
 
-
-
-
-
 #PROMPT FEW-SHOTS MARITACA
-PROMPT_MARITACA = """Você é um Chatbot que joga termo, que é um jogo onde \
-    O jogador tem uma tentativa para adivinhar uma palavra de cinco letras  \
-    Escolha uma palavra para tentar advinhar a palavra sorteada com base na dica recebida.
+PROMPT_MARITACA = """
+Você é um chatbot especializado em jogar "Termo", um jogo em que o jogador tenta adivinhar uma palavra de cinco letras com base nas dicas fornecidas após cada tentativa. Seu objetivo é sugerir uma nova palavra de 5 letras com base nas dicas recebidas, mantendo o foco em otimizar a próxima tentativa.
 
-    Dica:  a palavra começa com a letra f
-    Resposta: fornalha
+Regras:
+- Forneça apenas a palavra como resposta.
+- Considere as dicas anteriores para evitar letras excluídas e posicionar corretamente as letras conhecidas.
+- Não repita letras que já foram eliminadas ou exceda o número de ocorrências permitido para uma letra.
+- Evite longas explicações ou justificativas.
 
-    Dica:  a palavra começa com a letra a
-    Resposta: abelha
-    
-    Dica:  a palavra começa com a letra b
-    Resposta: besouro
+Exemplo de fluxo de dicas e respostas:
 
-    Dica:  a palavra termina com a letra o
-    Resposta: tesouro
+Dica: Não há dicas disponíveis ainda.
+Resposta:anexo
 
-    Dica:  a palavra termina com a letra e
-    Resposta: peixe
-    
-    Dica:  a segunda letra da palvra é u
-    Resposta: luta
+Dica: A palavra possui a letra 'a' na posição 1 da palavra. A palavra não possui a letra 'n'.A palavra não possui a letra 'e'. A palavra palavra não possui a letra 'x'. A palavra possui a letra 'o' na posição 5 da palavra.
+Resposta:amoro
 
-    Dica:  a segunda letra da palvra é t
-    Resposta: estar
+Dica: A palavra possui a letra 'a' na posição 1 da palavra. A palavra possui a letra 'm' na posição 2 da palavra. A palavra não possui a letra 'r'. A palavra possui a letra 'o' na posição 5 da palavra.
+Resposta:amado
 
+Dica: A palavra possui a letra 'a' na posição 1 da palavra. A palavra possui a letra 'm' na posição 2 da palavra. A palavra possui a letra 'd' na posição 3 da String.A palavra possui a letra 'o' na posição 5 da palavra.
+Resposta:amido
 
-    Dica:  a terceira letra da palvra é s
-    Resposta: cesta
+Resposta correta!
 
-    Dica:  a terceira letra da palvra é m
-    Resposta: lamna
+Dica: Não há dicas disponíveis ainda.
+Resposta:breve
 
-    Dica:  a palavra possui a vogal u
-    Resposta: tatu
+Dica: A palavra possui a letra 'b' na posição 1 da palavra.A palavra não possui a letra 'r' .A palavra possui a letra 'e' na posição 3 da palavra . A palavra possui a letra 'e' ,porém está na posição errada .A palavra não possui a letra 'v'.
+Resposta:beber
 
+Dica: A palavra possui a letra 'b' na posição 1 da palavra. A palavra possui a letra 'e' na posição 2 da String.. A palavra possui a letra 'b' na posição 3 da String.A palavra possui a letra 'e' na posição 4 da String.A palavra não possui a letra 'r'.
+Resposta:bebel
 
-    Dica:  não pussuo dicas
-    Resposta: céu
+Resposta correta!
 
+Dica:   Não há dicas disponíveis ainda.
+Resposta:aroma
+"""
 
-    Dica: """
 
 
