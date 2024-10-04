@@ -62,10 +62,10 @@ class Maritaca:
 
         return
 
-    def getWord(self, escolhidas, posicionadas, total, rd) -> str:
+    def getWord(self, escolhidas, total, rd) -> str:
         answer = ""
         i = 0
-        while (len(answer) != 5 or answer not in escolhidas or not rd.is_in(answer)) and i <= 5:
+        while (len(answer) != 5 or answer in escolhidas or not rd.is_in(answer)) and i <= 5:
             i += 1
             answer = self.model.generate(
                 self.prompt + "\nResposta:", 
@@ -74,11 +74,13 @@ class Maritaca:
                 stopping_tokens=["\n"]
             )["answer"]
 
+            answer = unidecode.unidecode(answer)
+            answer = answer.lower()
+
         print(i)
         if(i > 5):
-           answer = rd.select(total, posicionadas)
+           answer = rd.pick(total)
 
-        answer = answer.lower()
         return answer
 
 

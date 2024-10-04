@@ -51,7 +51,7 @@ class telegram:
             mensagem = """Seu jogo até o momento\t\t: \n\n"""
         i = 0
         for palavra in palavras_escolhidas:
-            palavra = unidecode(palavra)
+            #palavra = unidecode(palavra)
             palavra = list(palavra)
 
             for letra in palavra:

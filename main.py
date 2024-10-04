@@ -1,6 +1,6 @@
 import maritalk
 import telebot
-from unidecode import unidecode
+import unidecode
 from dotenv import load_dotenv
 import os
 
@@ -68,7 +68,7 @@ if __name__ == "__main__":
             return
 
         suporte_maritaca = random.returnAll()
-        palavra = random.getWord()
+        palavra = random.pick(suporte_maritaca)
         game.palavra = palavra
         preparaMaritaca()
         tele.pede_palavra_usuario(game.user["escolhidas"])
@@ -91,6 +91,7 @@ if __name__ == "__main__":
         
         # considerando que o jogo já foi iniciado
         digitado = message.text
+        digitado = unidecode.unidecode(digitado)
         digitado = digitado.lower()
 
         if(not game.trata_palavra(random, digitado)):
@@ -103,9 +104,10 @@ if __name__ == "__main__":
             tele.escreva(const.WAIT)
 
             posicionadas = random.criaPosicionadas(game.maricata["escolhidas"], game.maricata["feedbacks"])
+            suporte_maritaca = random.selectFew(suporte_maritaca, posicionadas)
 
             maritaca.accumulatePrompt(game.maricata["escolhidas"], game.maricata["feedbacks"])
-            resposta_maritaca = maritaca.getWord(game.maricata["escolhidas"], posicionadas, suporte_maritaca, random)
+            resposta_maritaca = maritaca.getWord(game.maricata["escolhidas"], suporte_maritaca, random)
             game.julga_palavra(False, resposta_maritaca)
 
         tele.mostra_jogo(game.user["escolhidas"], game.user["feedbacks"], game.fim, False)
