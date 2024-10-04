@@ -1,7 +1,7 @@
 import maritalk
 import unidecode
 import const as const
-import Randomword as rd
+import randomword as rd
 
 class Maritaca:
     def __init__(self, model=None, prompt=""):

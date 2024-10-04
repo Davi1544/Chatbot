@@ -7,8 +7,8 @@ import os
 import termo as termo
 import const as const
 import telegram as telegram
-import Randomword as rd
-import Maritaca as mari
+import randomword as rd
+import maritaca as mari
 
 # setup game
 game = termo.Termo()
