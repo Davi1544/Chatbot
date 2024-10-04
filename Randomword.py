@@ -29,10 +29,10 @@ class Randomword:
         """
 
         arraywords = []
-        with open(self.file,'r') as file:
+        with open(self.file, 'r', encoding='utf-8') as file:
             for line in file:
                 arraywords.append(line.strip())
-
+                
         if palavra in arraywords:
             return True
         else:

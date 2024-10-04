@@ -1,9 +1,10 @@
 import const as const
 
 class Termo:
-    def __init__(self, palavra = "", prompt = ""):
+    def __init__(self, palavra = "", prompt = "", fim=0):
         self.palavra = palavra
         self.prompt = prompt
+        self.fim = fim
 
         self.user = {
             "escolhidas": [],
@@ -25,6 +26,12 @@ class Termo:
 
     def julga_palavra(self, user, palavra) -> None:
         goal = self.palavra
+
+        if(goal == palavra):
+            if(user == True):
+                self.fim = 1
+            else:
+                self.fim = 2
 
         feedback = []
 
@@ -52,5 +59,14 @@ class Termo:
             feedbacks = list(self.user["feedbacks"])
             feedbacks.append(feedback)
             self.user["feedbacks"] = feedbacks
+
+        else:
+            escolhidas = list(self.maricata["escolhidas"])
+            escolhidas.append(palavra)
+            self.maricata["escolhidas"] = escolhidas
+
+            feedbacks = list(self.maricata["feedbacks"])
+            feedbacks.append(feedback)
+            self.maricata["feedbacks"] = feedbacks
 
         return
