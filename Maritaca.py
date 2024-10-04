@@ -1,6 +1,7 @@
 import maritalk
 import unidecode
 import const as const
+import Randomword as rd
 
 class Maritaca:
     def __init__(self, model=None, prompt=""):
@@ -61,16 +62,22 @@ class Maritaca:
 
         return
 
-    def getWord(self, escolhidas) -> str:
+    def getWord(self, escolhidas, posicionadas, total, rd) -> str:
         answer = ""
-        while len(answer) != 5 and answer not in escolhidas:
+        i = 0
+        while (len(answer) != 5 or answer not in escolhidas or not rd.is_in(answer)) and i <= 5:
+            i += 1
             answer = self.model.generate(
                 self.prompt + "\nResposta:", 
                 chat_mode=False,
                 do_sample=False,
                 stopping_tokens=["\n"]
             )["answer"]
-            
+
+        print(i)
+        if(i > 5):
+           answer = rd.select(total, posicionadas)
+
         answer = answer.lower()
         return answer
 

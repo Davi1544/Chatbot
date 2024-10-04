@@ -1,7 +1,7 @@
 import maritalk
 import telebot
 from unidecode import unidecode
-#from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
 import termo as termo
@@ -16,13 +16,14 @@ random = rd.Randomword("files/words.txt")
 tele = telegram.telegram()
 maritaca = mari.Maritaca()
 
+suporte_maritaca = []
+
 if __name__ == "__main__":
     # setup basico
-    #load_dotenv()
-    #CHAVE_MARITACA = os.getenv("CHAVE_MARITACA")
-    CHAVE_MARITACA = "66d0cf0694d1e514ee227bca_d1babb6a1f763ae4"
-    CHAVE_TELEGRAM = "7561963619:AAG1SCZBU-rwRG55jk228p3QE6dzlQqzo9o"
-    #CHAVE_TELEGRAM = os.getenv("CHAVE_TELEGRAM")
+    load_dotenv()
+    CHAVE_MARITACA = os.getenv("CHAVE_MARITACA")
+    CHAVE_TELEGRAM = os.getenv("CHAVE_TELEGRAM")
+
     model = maritalk.MariTalk(
         key=CHAVE_MARITACA,
         model="sabia-3"
@@ -59,12 +60,14 @@ if __name__ == "__main__":
         tele.escreva(const.MENSAGEM_ENTRADA)
     
     @bot.message_handler(commands=["smashai"])
-    def start(message):
+    def smash(message):
         set(message)
 
         if(game.palavra != ""):
             restart_attempt(message)
+            return
 
+        suporte_maritaca = random.returnAll()
         palavra = random.getWord()
         game.palavra = palavra
         preparaMaritaca()
@@ -88,6 +91,7 @@ if __name__ == "__main__":
         
         # considerando que o jogo já foi iniciado
         digitado = message.text
+        digitado = digitado.lower()
 
         if(not game.trata_palavra(random, digitado)):
             tele.nao_conheco()
@@ -98,8 +102,10 @@ if __name__ == "__main__":
             game.julga_palavra(True, digitado)
             tele.escreva(const.WAIT)
 
+            posicionadas = random.criaPosicionadas(game.maricata["escolhidas"], game.maricata["feedbacks"])
+
             maritaca.accumulatePrompt(game.maricata["escolhidas"], game.maricata["feedbacks"])
-            resposta_maritaca = maritaca.getWord(game.maricata["escolhidas"])
+            resposta_maritaca = maritaca.getWord(game.maricata["escolhidas"], posicionadas, suporte_maritaca, random)
             game.julga_palavra(False, resposta_maritaca)
 
         tele.mostra_jogo(game.user["escolhidas"], game.user["feedbacks"], game.fim, False)
